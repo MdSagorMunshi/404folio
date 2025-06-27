@@ -8,11 +8,24 @@ import ContactForm from "@/components/ContactForm";
 import { useKonamiCode } from "@/hooks/useKonamiCode";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import LoadingScreen from "@/components/LoadingScreen";
+import MatrixRain from "@/components/MatrixRain";
+import ErrorPopup from "@/components/ErrorPopup";
+import MemeGenerator from "@/components/MemeGenerator";
+import GlitchText from "@/components/GlitchText";
+import DevConsole from "@/components/DevConsole";
+import CursorTrail from "@/components/CursorTrail";
+import RandomComments from "@/components/RandomComments";
+import BugCounter from "@/components/BugCounter";
 
 const Portfolio = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [isEntered, setIsEntered] = useState(false);
   const [currentSection, setCurrentSection] = useState("landing");
   const [loadingProgress, setLoadingProgress] = useState(0);
+  const [clickCount, setClickCount] = useState(0);
+  const [secretMode, setSecretMode] = useState(false);
+  const [devConsoleOpen, setDevConsoleOpen] = useState(false);
   const isKonamiActivated = useKonamiCode();
 
   useEffect(() => {
@@ -25,6 +38,62 @@ const Portfolio = () => {
     }, 500);
 
     return () => clearInterval(interval);
+  }, []);
+
+  // Console easter eggs
+  useEffect(() => {
+    console.log('%c🚀 Welcome to the Developer Console!', 'color: #00D4FF; font-size: 24px; font-weight: bold;');
+    console.log('%c👨‍💻 Since you\'re here, you must be a fellow developer!', 'color: #00FF88; font-size: 16px;');
+    console.log('%c🎮 Try these console commands:', 'color: #FF1493; font-size: 16px;');
+    console.log('%c  • portfolio.unlockSecretMode()', 'color: #FFD700; font-size: 14px;');
+    console.log('%c  • portfolio.showMeTheMoney()', 'color: #FFD700; font-size: 14px;');
+    console.log('%c  • portfolio.iAmBatman()', 'color: #FFD700; font-size: 14px;');
+    console.log('%c  • portfolio.glitchMode()', 'color: #FFD700; font-size: 14px;');
+    
+    // Add console commands
+    (window as any).portfolio = {
+      unlockSecretMode: () => {
+        setSecretMode(true);
+        console.log('%c🎉 Secret mode activated! Matrix rain incoming...', 'color: #00FF88; font-size: 20px;');
+        return "Welcome to the Matrix, Neo.";
+      },
+      showMeTheMoney: () => {
+        console.log('%c💰 Error: Bank account still empty. Try becoming a client instead! 😄', 'color: #FFD700; font-size: 16px;');
+        return "Nice try!";
+      },
+      iAmBatman: () => {
+        document.body.style.filter = 'invert(1)';
+        setTimeout(() => {
+          document.body.style.filter = 'none';
+        }, 3000);
+        console.log('%c🦇 I\'m Batman!', 'color: #000; background: #FFD700; font-size: 30px; padding: 10px;');
+        return "Na na na na na na na na... BATMAN!";
+      },
+      glitchMode: () => {
+        document.body.classList.add('animate-glitch');
+        setTimeout(() => {
+          document.body.classList.remove('animate-glitch');
+        }, 5000);
+        return "Glitch mode activated for 5 seconds!";
+      },
+      openDevConsole: () => {
+        setDevConsoleOpen(true);
+        return "Developer console opened! Press ESC to close.";
+      }
+    };
+  }, []);
+
+  // Keyboard shortcut for dev console
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.key === '`') {
+        e.preventDefault();
+        setDevConsoleOpen(prev => !prev);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
   }, []);
 
   const enterPortfolio = () => {
@@ -85,10 +154,45 @@ const Portfolio = () => {
     { name: "Server Configuration", level: 80, category: "backend" }
   ];
 
+  // Handle logo clicks for easter egg
+  const handleLogoClick = () => {
+    setClickCount(prev => prev + 1);
+    
+    if (clickCount === 4) {
+      console.log('🎉 You found the secret click easter egg!');
+      document.body.style.transform = 'rotate(180deg)';
+      setTimeout(() => {
+        document.body.style.transform = 'none';
+      }, 2000);
+      setClickCount(0);
+    }
+  };
+
+  if (isLoading) {
+    return <LoadingScreen onComplete={() => setIsLoading(false)} />;
+  }
+
   return (
     <div className={`min-h-screen ${isKonamiActivated ? 'hue-rotate-180' : ''} transition-all duration-1000`}>
       <SpiralBinding />
       <FloatingElements />
+      <ErrorPopup />
+      <MemeGenerator />
+      <MatrixRain isActive={secretMode} />
+      <DevConsole isOpen={devConsoleOpen} onClose={() => setDevConsoleOpen(false)} />
+      <CursorTrail />
+      <RandomComments />
+      <BugCounter />
+      
+      {/* Secret keyboard shortcut hint */}
+      <motion.div
+        className="fixed bottom-4 left-20 text-xs text-gray-600 font-mono"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.3 }}
+        whileHover={{ opacity: 1 }}
+      >
+        Press ` to open dev console
+      </motion.div>
       
       <div className="ml-16 min-h-screen">
         {/* Landing Section */}
@@ -100,10 +204,13 @@ const Portfolio = () => {
         >
           <div className="text-center z-10">
             <motion.pre 
-              className="font-mono text-blue-400 text-lg md:text-xl lg:text-2xl mb-8 leading-tight animate-glitch"
+              className="font-mono text-blue-400 text-lg md:text-xl lg:text-2xl mb-8 leading-tight animate-glitch cursor-pointer"
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 0.5, type: "spring" }}
+              onClick={handleLogoClick}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
 {` ____                       ____  _          _ _           
 |  _ \\ _   _  __ _ _ __      / ___|| |__   ___| | |__  _   _ 
@@ -119,8 +226,8 @@ const Portfolio = () => {
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 1 }}
             >
-              <span className="text-blue-400">Full-Stack</span>{" "}
-              <span className="text-green-400">Developer</span>
+              <GlitchText text="Full-Stack" className="text-blue-400" />{" "}
+              <GlitchText text="Developer" className="text-green-400" />
             </motion.h1>
             
             <motion.div 
