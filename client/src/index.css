@@ -1,0 +1,328 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(240, 10%, 6%);
+  --foreground: hsl(0, 0%, 98%);
+  --muted: hsl(240, 3.7%, 15.9%);
+  --muted-foreground: hsl(240, 5%, 64.9%);
+  --popover: hsl(240, 10%, 3.9%);
+  --popover-foreground: hsl(0, 0%, 98%);
+  --card: hsl(240, 10%, 10%);
+  --card-foreground: hsl(0, 0%, 98%);
+  --border: hsl(240, 3.7%, 15.9%);
+  --input: hsl(240, 3.7%, 15.9%);
+  --primary: hsl(195, 100%, 50%);
+  --primary-foreground: hsl(211, 100%, 99%);
+  --secondary: hsl(240, 3.7%, 15.9%);
+  --secondary-foreground: hsl(0, 0%, 98%);
+  --accent: hsl(240, 3.7%, 15.9%);
+  --accent-foreground: hsl(0, 0%, 98%);
+  --destructive: hsl(0, 62.8%, 30.6%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(240, 4.9%, 83.9%);
+  --radius: 0.5rem;
+  
+  /* Custom portfolio colors */
+  --electric-blue: hsl(195, 100%, 50%);
+  --electric-blue-dark: hsl(207, 100%, 50%);
+  --neon-green: hsl(150, 100%, 50%);
+  --neon-green-bright: hsl(81, 100%, 54%);
+  --hot-pink: hsl(328, 100%, 54%);
+  --hot-pink-light: hsl(330, 100%, 71%);
+  --dark-bg: hsl(0, 0%, 4%);
+  --dark-secondary: hsl(0, 0%, 10%);
+}
+
+.dark {
+  --background: hsl(240, 10%, 3.9%);
+  --foreground: hsl(0, 0%, 98%);
+  --muted: hsl(240, 3.7%, 15.9%);
+  --muted-foreground: hsl(240, 5%, 64.9%);
+  --popover: hsl(240, 10%, 3.9%);
+  --popover-foreground: hsl(0, 0%, 98%);
+  --card: hsl(240, 10%, 3.9%);
+  --card-foreground: hsl(0, 0%, 98%);
+  --border: hsl(240, 3.7%, 15.9%);
+  --input: hsl(240, 3.7%, 15.9%);
+  --primary: hsl(195, 100%, 50%);
+  --primary-foreground: hsl(211, 100%, 99%);
+  --secondary: hsl(240, 3.7%, 15.9%);
+  --secondary-foreground: hsl(0, 0%, 98%);
+  --accent: hsl(240, 3.7%, 15.9%);
+  --accent-foreground: hsl(0, 0%, 98%);
+  --destructive: hsl(0, 62.8%, 30.6%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(240, 4.9%, 83.9%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    background-image: 
+      radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0);
+    background-size: 20px 20px;
+    overflow-x: hidden;
+  }
+}
+
+@layer components {
+  /* Custom animations */
+  @keyframes glitch {
+    0%, 100% { transform: translate(0); }
+    10% { transform: translate(-2px, 2px); }
+    20% { transform: translate(-2px, -2px); }
+    30% { transform: translate(2px, 2px); }
+    40% { transform: translate(2px, -2px); }
+    50% { transform: translate(-2px, 2px); }
+    60% { transform: translate(-2px, -2px); }
+    70% { transform: translate(2px, 2px); }
+    80% { transform: translate(-2px, -2px); }
+    90% { transform: translate(2px, 2px); }
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+  
+  @keyframes pixelBounce {
+    0%, 100% { transform: translateY(0px) scale(1); }
+    50% { transform: translateY(-10px) scale(1.1); }
+  }
+  
+  @keyframes typewriter {
+    0% { width: 0; }
+    50% { width: 100%; }
+    100% { width: 0; }
+  }
+  
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+  
+  @keyframes spiral {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  @keyframes loading {
+    0% { width: 0%; }
+    70% { width: 100%; }
+    85% { width: 95%; }
+    100% { width: 100%; }
+  }
+
+  /* Custom utility classes */
+  .animate-glitch {
+    animation: glitch 2s infinite;
+  }
+  
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  .animate-pixel-bounce {
+    animation: pixelBounce 2s ease-in-out infinite;
+  }
+  
+  .animate-typewriter {
+    animation: typewriter 3s steps(40) infinite;
+  }
+  
+  .animate-blink {
+    animation: blink 1s infinite;
+  }
+  
+  .animate-spiral {
+    animation: spiral 20s linear infinite;
+  }
+  
+  .animate-loading {
+    animation: loading 3s ease-in-out infinite;
+  }
+
+  /* Notebook paper effect */
+  .notebook-paper {
+    background: linear-gradient(to bottom, hsl(60, 9%, 97%) 0%, hsl(60, 9%, 94%) 100%);
+    position: relative;
+    color: hsl(0, 0%, 13%);
+  }
+  
+  .notebook-paper::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: hsl(0, 76%, 60%);
+    margin-left: 40px;
+  }
+  
+  .notebook-paper::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    height: 100%;
+    background: repeating-linear-gradient(
+      transparent,
+      transparent 24px,
+      hsl(0, 0%, 88%) 24px,
+      hsl(0, 0%, 88%) 26px
+    );
+  }
+  
+  /* Torn paper edges */
+  .torn-edge {
+    position: relative;
+  }
+  
+  .torn-edge::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 3px,
+      hsl(0, 0%, 10%) 3px,
+      hsl(0, 0%, 10%) 6px
+    );
+  }
+  
+  /* Pixel art styling */
+  .pixel-art {
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-crisp-edges;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+  }
+  
+  /* Console styling */
+  .console-text {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--neon-green-bright);
+    background: hsl(0, 0%, 0%);
+    padding: 0.5rem;
+    border-radius: 4px;
+    display: inline-block;
+  }
+  
+  /* Sticky note styling */
+  .sticky-note {
+    background: hsl(54, 100%, 62%);
+    color: hsl(0, 0%, 20%);
+    padding: 1rem;
+    transform: rotate(-2deg);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    position: relative;
+    font-family: 'Kalam', cursive;
+  }
+  
+  .sticky-note::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 20px;
+    background: hsl(45, 100%, 51%);
+    border-radius: 50%;
+  }
+  
+  /* Floating elements */
+  .floating-element {
+    position: fixed;
+    z-index: 10;
+    pointer-events: auto;
+    cursor: pointer;
+  }
+  
+  /* Handwritten annotations */
+  .annotation {
+    font-family: 'Kalam', cursive;
+    color: var(--hot-pink);
+    transform: rotate(-1deg);
+    font-size: 0.9rem;
+  }
+  
+  /* Error message styling */
+  .error-feature {
+    background: hsl(0, 84%, 55%);
+    color: hsl(0, 0%, 100%);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-family: 'Fira Code', monospace;
+    border: 2px dashed hsl(0, 0%, 100%);
+  }
+  
+  /* Loading animation */
+  .loading-bar {
+    background: hsl(0, 0%, 20%);
+    height: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .loading-progress {
+    height: 100%;
+    background: linear-gradient(90deg, var(--electric-blue), var(--neon-green-bright), var(--hot-pink));
+    border-radius: 10px;
+  }
+  
+  /* Skill tree styling */
+  .skill-node {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, var(--electric-blue), var(--neon-green));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .skill-node:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+  }
+  
+  .skill-connection {
+    position: absolute;
+    height: 3px;
+    background: linear-gradient(90deg, var(--electric-blue), var(--neon-green));
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  /* Font families */
+  .font-mono {
+    font-family: 'Fira Code', monospace;
+  }
+  
+  .font-terminal {
+    font-family: 'JetBrains Mono', monospace;
+  }
+  
+  .font-handwritten {
+    font-family: 'Kalam', cursive;
+  }
+}
