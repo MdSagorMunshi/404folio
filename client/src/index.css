@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Block text selection - because why would you need to copy anything? */
+* {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Allow selection only in input fields and textareas */
+input, textarea {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
 :root {
   --background: hsl(240, 10%, 6%);
   --foreground: hsl(0, 0%, 98%);

@@ -17,6 +17,11 @@ import DevConsole from "@/components/DevConsole";
 import CursorTrail from "@/components/CursorTrail";
 import RandomComments from "@/components/RandomComments";
 import BugCounter from "@/components/BugCounter";
+import CustomContextMenu from "@/components/CustomContextMenu";
+import AnnoyingPopup from "@/components/AnnoyingPopup";
+import FakeLoadingBar from "@/components/FakeLoadingBar";
+import RandomGlitch from "@/components/RandomGlitch";
+import RunAwayButton from "@/components/RunAwayButton";
 
 const Portfolio = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -83,12 +88,39 @@ const Portfolio = () => {
     };
   }, []);
 
-  // Keyboard shortcut for dev console
+  // Keyboard shortcuts and easter eggs
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
+      // Dev console toggle
       if (e.key === '`') {
         e.preventDefault();
         setDevConsoleOpen(prev => !prev);
+      }
+      
+      // Ctrl+S "saves" the page
+      if (e.ctrlKey && e.key === 's') {
+        e.preventDefault();
+        alert("Saved! Just kidding, this is a static site. Nothing to save here. But I appreciate your muscle memory!");
+      }
+      
+      // Escape key adds chaos
+      if (e.key === 'Escape') {
+        document.body.style.filter = `hue-rotate(${Math.random() * 360}deg)`;
+        setTimeout(() => {
+          document.body.style.filter = 'none';
+        }, 2000);
+      }
+      
+      // Space bar tilts the page
+      if (e.key === ' ' && e.target === document.body) {
+        e.preventDefault();
+        const rotation = Math.random() * 10 - 5;
+        document.body.style.transform = `rotate(${rotation}deg)`;
+      }
+      
+      // F key to pay respects
+      if (e.key === 'f' || e.key === 'F') {
+        console.log('%c💐 You paid respects. The code appreciates it.', 'color: #FFD700; font-size: 16px;');
       }
     };
 
@@ -183,6 +215,11 @@ const Portfolio = () => {
       <CursorTrail />
       <RandomComments />
       <BugCounter />
+      <CustomContextMenu />
+      <AnnoyingPopup />
+      <FakeLoadingBar />
+      <RandomGlitch />
+      <RunAwayButton />
       
       {/* Secret keyboard shortcut hint */}
       <motion.div
