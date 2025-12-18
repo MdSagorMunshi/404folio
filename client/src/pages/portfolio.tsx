@@ -581,7 +581,7 @@ const Portfolio = () => {
                     ].map((contact, index) => (
                       <motion.a 
                         key={index}
-                        href="#" 
+                        href="https://github.com/MdSagorMunshi" 
                         className={`flex items-center space-x-3 text-white hover:${contact.color} transition-colors group`}
                         whileHover={{ scale: 1.05 }}
                       >
