@@ -574,10 +574,10 @@ const Portfolio = () => {
                   <h3 className="text-2xl font-bold mb-4 text-blue-400">Find Me Online</h3>
                   <div className="space-y-4">
                     {[
-                      { icon: "fab fa-github", text: "github.com/ryanshelby", color: "text-green-400" },
-                      { icon: "fab fa-linkedin", text: "linkedin.com/in/ryanshelby", color: "text-blue-400" },
-                      { icon: "fab fa-twitter", text: "@ryanshelby_dev", color: "text-pink-400" },
-                      { icon: "fas fa-envelope", text: "ryan@example.com", color: "text-green-400" }
+                      { icon: "fab fa-github", text: "github.com/MdSagorMunshi", color: "text-green-400" },
+                      { icon: "fab fa-linkedin", text: "linkedin.com/in/rynex", color: "text-blue-400" },
+                      { icon: "fab fa-twitter", text: "@sudoRyanShelby", color: "text-pink-400" },
+                      { icon: "fas fa-envelope", text: "nev@disroot.org", color: "text-green-400" }
                     ].map((contact, index) => (
                       <motion.a 
                         key={index}
