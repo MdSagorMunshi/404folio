@@ -573,26 +573,26 @@ const Portfolio = () => {
                 <div className="bg-gray-800 p-6 rounded-lg">
                   <h3 className="text-2xl font-bold mb-4 text-blue-400">Find Me Online</h3>
                   <div className="space-y-4">
-                    {[
-                      { icon: "fab fa-github", text: "github.com/MdSagorMunshi", color: "text-green-400" },
-                      { icon: "fab fa-linkedin", text: "linkedin.com/in/rynex", color: "text-blue-400" },
-                      { icon: "fab fa-twitter", text: "@sudoRyanShelby", color: "text-pink-400" },
-                      { icon: "fas fa-envelope", text: "nev@disroot.org", color: "text-green-400" }
-                    ].map((contact, index) => (
-                      <motion.a 
-                        key={index}
-                        href="https://github.com/MdSagorMunshi" 
-                        className={`flex items-center space-x-3 text-white hover:${contact.color} transition-colors group`}
-                        whileHover={{ scale: 1.05 }}
-                      >
-                        <motion.i 
-                          className={`${contact.icon} text-2xl group-hover:animate-bounce`}
-                          whileHover={{ rotate: 360 }}
-                          transition={{ duration: 0.5 }}
-                        />
-                        <span>{contact.text}</span>
-                      </motion.a>
-                    ))}
+{[
+  { icon: "fab fa-github", text: "github.com/MdSagorMunshi", color: "text-green-400", href: "https://github.com/MdSagorMunshi" },
+  { icon:  "fab fa-linkedin", text:  "linkedin.com/in/rynex", color: "text-blue-400", href: "https://linkedin.com/in/rynex" },
+  { icon: "fab fa-twitter", text: "@sudoRyanShelby", color: "text-pink-400", href: "https://x.com/sudoRyanShelby" },
+  { icon: "fas fa-envelope", text: "nev@disroot. org", color: "text-green-400", href: "mailto: nev@disroot.org" }
+]. map((contact, index) => (
+  <motion.a 
+    key={index}
+    href={contact.href}
+    className={`flex items-center space-x-3 text-white hover:${contact.color} transition-colors group`}
+    whileHover={{ scale: 1.05 }}
+  >
+    <motion.i 
+      className={`${contact.icon} text-2xl group-hover:animate-bounce`}
+      whileHover={{ rotate: 360 }}
+      transition={{ duration: 0.5 }}
+    />
+    <span>{contact.text}</span>
+  </motion.a>
+))}
                   </div>
                 </div>
                 
